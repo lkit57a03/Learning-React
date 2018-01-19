@@ -27,7 +27,7 @@ class Filter extends Component {
 class Playlist extends Component {
   render() {
     return (
-      <div style={{ ...defaultStyle,display:"inline-block", width: '26%' }}>
+      <div style={{ ...defaultStyle, display: "inline-block", width: '26%' }}>
         <img />
         <h3>Playlist Name</h3>
         <ul><li>Song 1</li><li>Song 2</li><li>Song 3</li></ul>
@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1 style={{...defaultStyle, 'font-size': ' 54px'}}>Title</h1>
+        <h1 style={{ ...defaultStyle, 'font-size': ' 54px' }}>Title</h1>
         <Aggregate />
         <Aggregate />
         <Filter />
