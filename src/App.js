@@ -10,27 +10,39 @@ let fakeServerData = {
     playlists: [
       {
         name: 'My Favorites',
-        songs: [{name: 'Lose it',duration: 1345},
-         {name: 'Lose it',duration: 1345}, 
-         {name: 'Lose it',duration: 1345}]
+        songs: [
+
+          { name: 'Lose it', duration: 1345 },
+          { name: 'Lose it', duration: 1345 },
+          { name: 'Lose it', duration: 1345 }
+        ]
       },
       {
         name: 'Discover Weekly',
-        songs: [{ name: 'Lose it', duration: 1345 },
+        songs: [
+
           { name: 'Lose it', duration: 1345 },
-          { name: 'Lose it', duration: 1345 }]
+          { name: 'Lose it', duration: 1345 },
+          { name: 'Lose it', duration: 1345 }
+        ]
       },
       {
         name: 'Another PLaylist-The Best',
-        songs: [{ name: 'Lose it', duration: 1345 },
+        songs: [
+
           { name: 'Lose it', duration: 1345 },
-          { name: 'Lose it', duration: 1345 }]
+          { name: 'Lose it', duration: 1345 },
+          { name: 'Lose it', duration: 1345 }
+        ]
       },
       {
         name: 'Playlist - Yeah!',
-        songs: [{ name: 'Lose it', duration: 1345 },
+        songs: [
+
           { name: 'Lose it', duration: 1345 },
-          { name: 'Lose it', duration: 1345 }]
+          { name: 'Lose it', duration: 1345 },
+          { name: 'Lose it', duration: 1345 }
+        ]
       }
     ]
   }
@@ -46,15 +58,15 @@ class PlaylistConter extends Component {
 }
 class HoursCounter extends Component {
   render() {
-    let allsongs = this.props.playlists.reduce((songs,eachPlaylist)=>{
+    let allsongs = this.props.playlists.reduce((songs, eachPlaylist) => {
       return songs.concat(eachPlaylist.songs)
-    },[])
-   let totalDuration = allsongs.reduce((sum, eachsongs)=>{
-    return sum + eachsongs.duration
-   },0)
+    }, [])
+    let totalDuration = allsongs.reduce((sum, eachsongs) => {
+      return sum + eachsongs.duration
+    }, 0)
     return (
       <div style={{ ...defaultStyle, width: "40%", display: "inline-block" }}>
-        <h2>{Math.round(totalDuration/60)} Hours</h2>
+        <h2>{Math.round(totalDuration / 60)} Hours</h2>
       </div>
     );
   }
@@ -71,11 +83,16 @@ class Filter extends Component {
 }
 class Playlist extends Component {
   render() {
+    let playlist = this.props.playlist
     return (
-      <div style={{ ...defaultStyle, display: "inline-block", width: '26%' }}>
+      <div style={{ ...defaultStyle, display: "inline-block", width: '25%' }}>
         <img />
-        <h3>Playlist Name</h3>
-        <ul><li>Song</li><li>Song 1</li><li>Song 2</li></ul>
+        <h3>{playlist.name}</h3>
+        <ul>
+          {playlist.songs.map(song =>
+          <li>{song.name}</li>
+          )}
+          </ul>
       </div>
     );
   }
@@ -103,11 +120,11 @@ class App extends Component {
         <PlaylistConter playlists={this.state.serverData.user
               && this.state.serverData.user.playlists} />
             <HoursCounter playlists={this.state.serverData.user
-              && this.state.serverData.user.playlists}/>
+              && this.state.serverData.user.playlists} />
             <Filter />
-            <Playlist />
-            <Playlist />
-            <Playlist />
+            {
+              this.state.serverData.user.playlists.map(playlist => <Playlist playlist={playlist}/>)
+            } 
           </div> : <h1 style={defaultStyle}>Loading...</h1>
         }
       </div>
